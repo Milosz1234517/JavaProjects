@@ -1,0 +1,1 @@
+jpackage -i . --name BallGame --main-class Main --main-jar BallGame.jar --win-shortcut --win-menu --win-dir-chooser

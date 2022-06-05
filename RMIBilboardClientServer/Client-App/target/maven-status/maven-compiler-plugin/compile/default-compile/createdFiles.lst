@@ -1,0 +1,8 @@
+klient\Klient.class
+klient\Main$2.class
+interfaces\IManager.class
+interfaces\Order.class
+klient\Main.class
+interfaces\IBillboard.class
+interfaces\IClient.class
+klient\Main$1.class

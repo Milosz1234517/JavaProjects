@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?language javascript?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox fx:id="vbox" prefHeight="500.0"
+      prefWidth="500.0" spacing="10" xmlns:fx="http://javafx.com/fxml/1"
+      xmlns="http://javafx.com/javafx/2.2">
+    <children>
+        <ComboBox fx:id="combox" onAction="updateCombo(event);" prefHeight="26.0" prefWidth="227.0"
+                  promptText="Select Template"/>
+        <Label fx:id="inputLbl" cache="true"
+               cacheHint="SCALE" prefHeight="40.0" prefWidth="400.0" text="Information:"/>
+        <TextField fx:id="inputText" prefWidth="100.0"/>
+        <Button fx:id="okBtn" alignment="CENTER_RIGHT"
+                contentDisplay="CENTER" mnemonicParsing="false"
+                onAction="buttonAction(event);" text="Create Invitation" textAlignment="CENTER"/>
+
+        <Label fx:id="outputLbl" cache="true"
+               cacheHint="SCALE" prefHeight="30.0" prefWidth="200.0"
+               text="Output:"/>
+        <TextArea fx:id="outputText" prefHeight="100.0"
+                  prefWidth="200.0" wrapText="true"/>
+    </children>
+    <fx:script>
+        var ResourceBundle = Java.type("java.util.PropertyResourceBundle");
+        var jString = Java.type("java.lang.String");
+        var FileInputStream = Java.type("java.io.FileInputStream");
+        var resource = new ResourceBundle(new FileInputStream("marry.properties"));
+        var temps = Java.type("javafx.collections.FXCollections");
+        var templates = [];
+        var MessageFormat = Java.type("java.text.MessageFormat");
+        var text = null;
+
+        templates.push("birthday");
+        templates.push("marry");
+        templates.push("comunion");
+        combox.setItems(temps.observableArrayList(templates));
+
+        function buttonAction(event) {
+            text = resource.getString(new jString("temp"));
+            var array = inputText.text.split("-")
+            var msgFormat = new MessageFormat(text);
+            var out = msgFormat.format(Java.to(array, "java.lang.Object[]"));
+            outputText.text = out;
+        }
+
+        function updateCombo(event) {
+            resource = new ResourceBundle(new FileInputStream(combox.getValue() + ".properties"));
+            text = resource.getString(new jString("temp.info"));
+            inputLbl.text = text;
+        }
+
+    </fx:script>
+</VBox>

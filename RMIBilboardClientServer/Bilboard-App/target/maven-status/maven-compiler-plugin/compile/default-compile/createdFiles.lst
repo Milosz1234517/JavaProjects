@@ -1,0 +1,8 @@
+bilboard\Advert.class
+bilboard\Main.class
+interfaces\IManager.class
+bilboard\Bilboard.class
+bilboard\Main$1.class
+interfaces\Order.class
+interfaces\IBillboard.class
+interfaces\IClient.class
